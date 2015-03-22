@@ -39,7 +39,7 @@ public class ItemAdapter extends BaseAdapter {
         if (convertView == null) {
             LayoutInflater mInflater = (LayoutInflater)
                     context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-            convertView = mInflater.inflate(R.layout.event, null);
+            convertView = mInflater.inflate(R.layout.item, null);
         }
         TextView oi =(TextView) convertView.findViewById(R.id.name_item_text);
         TextView CF = (TextView) convertView.findViewById(R.id.name_item_text);
