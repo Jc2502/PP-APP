@@ -35,7 +35,7 @@ public class ItemList extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_list);
-
+        Log.e("ID_EVENT", getIntent().getStringExtra("event_id"));
         item_list = (ListView) findViewById(R.id.list_item);
         add_element =(FloatingActionButton) findViewById(R.id.fab_item);
 

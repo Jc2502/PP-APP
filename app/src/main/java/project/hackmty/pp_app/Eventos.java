@@ -69,12 +69,12 @@ public class Eventos extends ActionBarActivity {
                             EventosList.setAdapter(adapter);
                             EventosList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
-                                public void onItemClick(AdapterView<?> parent, View view, int position,
-                                                        long id) {
+                                public void onItemClick(AdapterView<?> parent, View view, int position,long id) {
                                     final Event event = (Event)  EventosList.getAdapter().getItem(position);
                                     String item = event.getObjectId();
-                                    startActivity(new Intent(getApplicationContext(),ItemList.class));
-
+                                    Intent intent = new Intent(getApplicationContext(),ItemList.class);
+                                    intent.putExtra("event_id", adapter.getItem(position).getObjectId());
+                                    startActivity(intent);
                                     //Toast.makeText(getBaseContext(), item, Toast.LENGTH_LONG).show();
 
                                 }

@@ -10,8 +10,12 @@
     <string name="title_activity_list__items">List_Items</string>
     <string name="setdate">Inserta Fecha</string>
     <string name="campos_requeridos">Todos los campos son Requeridos</string>
+    <string name="prompt_account">Cuenta</string>
+    <string name="prompt_psswd">Password</string>
+    <string name="action_sign_in_short">Short</string>
+    <string name="prompt_username">UserName</string>
 
-    <string name="url_endPoint">http://10.20.55.105:8000</string>
+    <string name="url_endPoint">http://10.12.172.234:8000</string>
     <string name="title_activity_item_list">ItemList</string>
 
 
