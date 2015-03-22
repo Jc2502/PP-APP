@@ -63,7 +63,7 @@ public class Create_Event extends ActionBarActivity {
                     String location = String.valueOf(latitude) +","+ String.valueOf(longitude);
                     //new GetEventTask(getApplicationContext(), name, date,location,"0"," ").execute();
                     String tag_json_obj = "json_obj_req";
-                    String url ="http://10.20.55.105:8000/api/v1/events/";
+                    String url =getResources().getString(R.string.url_endPoint)+"/api/v1/events/";
 
                     RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
 
@@ -75,7 +75,7 @@ public class Create_Event extends ActionBarActivity {
                     params.put("owner_id","0");
                     params.put("description", "asd");
 
-                    String URL = "http://10.12.172.234:8000/api/v1/events/";
+                    String URL = getResources().getString(R.string.url_endPoint)+"/api/v1/events/";
 
                     JsonObjectRequest req = new JsonObjectRequest(
                             Request.Method.POST,
@@ -85,15 +85,12 @@ public class Create_Event extends ActionBarActivity {
 
                                 @Override
                                 public void onResponse(JSONObject response) {
-                                    Log.d("TAG", response.toString());
 
                                 }
                             }, new Response.ErrorListener() {
 
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            //VolleyLog.d("TAasdokasdasdasdadaG", "Error: " + new String(error.networkResponse.data));
-                            Log.e("TASK",new String(error.networkResponse.data));
                              if(error.networkResponse.statusCode == 400)
                              {
                                  Toast.makeText(getApplicationContext(),R.string.campos_requeridos,Toast.LENGTH_SHORT).show();

@@ -10,4 +10,8 @@
     <string name="title_activity_list__items">List_Items</string>
     <string name="setdate">Inserta Fecha</string>
     <string name="campos_requeridos">Todos los campos son Requeridos</string>
+
+    <string name="url_endPoint">http://10.20.55.105:8000</string>
+
+
 </resources>
