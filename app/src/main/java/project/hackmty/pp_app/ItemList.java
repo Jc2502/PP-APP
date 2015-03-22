@@ -1,6 +1,5 @@
 package project.hackmty.pp_app;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -23,26 +22,26 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class Eventos extends ActionBarActivity {
+public class ItemList extends ActionBarActivity {
 
-    FloatingActionButton create_event;
-    private ListView EventosList;
-    public EventAdapter adapter;
+    FloatingActionButton add_element;
+    private ListView item_list;
+    public ItemAdapter adapter;
     private static final String DATEF = "yyyy-MM-dd HH:mm:ss";
-    ArrayList<Event>eventos_list;
+    ArrayList<Item>items_list;
     private Gson gson = new GsonBuilder().setDateFormat(DATEF).create();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_eventos);
-        create_event = (FloatingActionButton) findViewById(R.id.fab);
-        EventosList =(ListView) findViewById(R.id.ListViewEvents);
+        setContentView(R.layout.activity_item_list);
 
+        item_list = (ListView) findViewById(R.id.list_item);
+        add_element =(FloatingActionButton) findViewById(R.id.fab_item);
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
-        String URL = getResources().getString(R.string.url_endPoint)+"/api/v1/events/";
+        String URL = getResources().getString(R.string.url_endPoint)+"/api/v1/items/";
 
         JsonObjectRequest req = new JsonObjectRequest(
                 Request.Method.GET,
@@ -53,58 +52,46 @@ public class Eventos extends ActionBarActivity {
                     public void onResponse(JSONObject response) {
                         JSONArray jsonEvents = null;
                         try {
-                            jsonEvents = response.getJSONArray("events");
-                            Log.e("JSONARRAY",jsonEvents.toString());
-                            ArrayList<Event> events = new ArrayList<Event>();
+                            jsonEvents = response.getJSONArray("items");
+                            Log.e("JSONARRAY", jsonEvents.toString());
+                            ArrayList<Item> items = new ArrayList<Item>();
                             for (int i =0; i<jsonEvents.length();i++){
                                 try {
-                                    events.add(gson.fromJson(jsonEvents.getJSONObject(i).toString(), Event.class));
+                                    items.add(gson.fromJson(jsonEvents.getJSONObject(i).toString(), Item.class));
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
                             }
-                            eventos_list = events;
-                            adapter = new EventAdapter(getApplicationContext(),eventos_list);
+                            items_list = items;
+                            adapter = new ItemAdapter(getApplicationContext(),items_list);
                             adapter.notifyDataSetChanged();
-                            EventosList.setAdapter(adapter);
-                            EventosList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                @Override
-                                public void onItemClick(AdapterView<?> parent, View view, int position,
-                                                        long id) {
-                                    final Event event = (Event)  EventosList.getAdapter().getItem(position);
-                                    String item = event.getObjectId();
-                                    startActivity(new Intent(getApplicationContext(),ItemList.class));
+                            item_list.setAdapter(adapter);
 
-                                    //Toast.makeText(getBaseContext(), item, Toast.LENGTH_LONG).show();
-
-                                }
-                            });
-                            EventosList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                            item_list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 
                                 public boolean onItemLongClick(final AdapterView<?> arg0, View arg1,
                                                                final int pos, long id) {
-                                    final Event event = (Event)  EventosList.getAdapter().getItem(pos);
-                                    RequestQueue queue =  Volley.newRequestQueue(getApplicationContext());
-                                    String url = getResources().getString(R.string.url_endPoint)+"/api/v1/events/"+event.getObjectId();
+                                    final Event event = (Event) item_list.getAdapter().getItem(pos);
+                                    RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+                                    //String url = getResources().getString(R.string.url_endPoint) + "/api/v1/items/3" + event.getObjectId();
+                                    String url = getResources().getString(R.string.url_endPoint) + "/api/v1/items/3";
 
                                     JsonObjectRequest dr = new JsonObjectRequest(Request.Method.DELETE, url,
-                                            new Response.Listener<JSONObject>()
-                                            {
+                                            new Response.Listener<JSONObject>() {
                                                 @Override
                                                 public void onResponse(JSONObject response) {
                                                     // response
                                                     try {
                                                         Toast.makeText(getApplicationContext(), response.getString("message"), Toast.LENGTH_LONG).show();
-                                                    }catch (JSONException jsonEx){
+                                                    } catch (JSONException jsonEx) {
                                                         jsonEx.printStackTrace();
                                                     }
-                                                    eventos_list.remove(pos);
+                                                    items_list.remove(pos);
                                                     adapter.notifyDataSetChanged();
 
                                                 }
                                             },
-                                            new Response.ErrorListener()
-                                            {
+                                            new Response.ErrorListener() {
                                                 @Override
                                                 public void onErrorResponse(VolleyError error) {
                                                     // error.
@@ -151,14 +138,13 @@ public class Eventos extends ActionBarActivity {
         };
 
         queue.add(req);
-        create_event.setOnClickListener(new View.OnClickListener() {
+
+        add_element.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), Create_Event.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                Toast.makeText(getApplicationContext(),"HOLA",Toast.LENGTH_SHORT).show();
             }
         });
     }
 
 }
-
-

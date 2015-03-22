@@ -12,6 +12,7 @@
     <string name="campos_requeridos">Todos los campos son Requeridos</string>
 
     <string name="url_endPoint">http://10.20.55.105:8000</string>
+    <string name="title_activity_item_list">ItemList</string>
 
 
 </resources>
