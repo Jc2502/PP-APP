@@ -26,7 +26,7 @@ public class EventAdapter extends BaseAdapter {
         return this.events.size();
     }
 
-    public Object getItem(int position) {
+    public Event getItem(int position) {
         return this.events.get(position);
     }
 
@@ -34,13 +34,14 @@ public class EventAdapter extends BaseAdapter {
         return position;
     }
 
+
     public View getView(final int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             LayoutInflater mInflater = (LayoutInflater)
                     context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView = mInflater.inflate(R.layout.event, null);
         }
-
+        TextView oi =(TextView) convertView.findViewById(R.id.object_id);
         TextView CF = (TextView) convertView.findViewById(R.id.CFText);
         TextView min = (TextView) convertView.findViewById(R.id.minText);
         TextView det = (TextView) convertView.findViewById(R.id.date_adapt);
@@ -48,6 +49,7 @@ public class EventAdapter extends BaseAdapter {
         CF.setText(events.get(position).getName());
         min.setText(events.get(position).getDate());
         det.setText(events.get(position).getDescription());
+        oi.setText(events.get(position).getObjectId());
 
         return convertView;
     }

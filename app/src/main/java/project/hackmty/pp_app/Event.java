@@ -4,11 +4,30 @@ package project.hackmty.pp_app;
  * Created by Juan Acosta on 3/22/2015.
  */
 public class Event {
+    public String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String name;
     public String location;
     public String description;
     public String owner_id;
     public String date;
+    public String objectId;
+
+    public String getObjectId() {
+        return objectId;
+    }
+
+    public void setObjectId(String objectId) {
+        this.objectId = objectId;
+    }
 
     public String getName() {
         return name;

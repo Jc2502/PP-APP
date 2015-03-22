@@ -7,9 +7,12 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 import com.android.volley.*;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -27,6 +30,7 @@ public class Eventos extends ActionBarActivity {
 
     FloatingActionButton create_event;
     private ListView EventosList;
+    public EventAdapter adapter;
     private static final String DATEF = "yyyy-MM-dd HH:mm:ss";
     ArrayList<Event>eventos_list;
     private Gson gson = new GsonBuilder().setDateFormat(DATEF).create();
@@ -38,9 +42,46 @@ public class Eventos extends ActionBarActivity {
         new EventTask(getApplicationContext(),gson,EventosList).execute();
         create_event = (FloatingActionButton) findViewById(R.id.fab);
         EventosList =(ListView) findViewById(R.id.ListViewEvents);
+
+        EventosList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+            public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+                                           int pos, long id) {
+                // TODO Auto-generated method stub
+                final Event event = (Event)  EventosList.getAdapter().getItem(pos);
+                Log.e("EVENT",""+event.getObjectId());
+                RequestQueue queue =  Volley.newRequestQueue(getApplicationContext());
+                Log.v("long clicked","pos: " + pos);
+                String url = "http://10.20.55.105:8000/api/v1/events/"+event.getObjectId();
+                Log.e("THIS","jhfhgd");
+                StringRequest dr = new StringRequest(Request.Method.DELETE, url,
+                        new Response.Listener<String>()
+                        {
+                            @Override
+                            public void onResponse(String response) {
+                                // response
+                                Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
+
+
+                            }
+                        },
+                        new Response.ErrorListener()
+                        {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                // error.
+
+                            }
+                        }
+                );
+                queue.add(dr);
+
+                return false;
+            }
+        });
         RequestQueue queue = Volley.newRequestQueue(this);
 
-        String URL = "http://10.12.172.234:8000/api/v1/events/";
+        String URL = "http://10.20.55.105:8000/api/v1/events/";
 
         JsonObjectRequest req = new JsonObjectRequest(
                 Request.Method.GET,
@@ -62,7 +103,8 @@ public class Eventos extends ActionBarActivity {
                                 }
                             }
                             eventos_list = events;
-                            EventAdapter adapter = new EventAdapter(getApplicationContext(),eventos_list);
+                            adapter = new EventAdapter(getApplicationContext(),eventos_list);
+                            adapter.notifyDataSetChanged();
                             EventosList.setAdapter(adapter);
                         } catch (JSONException e) {
                             e.printStackTrace();
