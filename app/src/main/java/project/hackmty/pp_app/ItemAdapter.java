@@ -43,7 +43,7 @@ public class ItemAdapter extends BaseAdapter {
         }
         TextView oi =(TextView) convertView.findViewById(R.id.name_item_text);
         TextView CF = (TextView) convertView.findViewById(R.id.name_item_text);
-        TextView min = (TextView) convertView.findViewById(R.id.minText);
+        TextView min = (TextView) convertView.findViewById(R.id.name_item_text);
         TextView det = (TextView) convertView.findViewById(R.id.price_adapt);
 
         CF.setText(items.get(position).getName());

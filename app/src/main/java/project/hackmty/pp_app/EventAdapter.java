@@ -41,15 +41,16 @@ public class EventAdapter extends BaseAdapter {
                     context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView = mInflater.inflate(R.layout.event, null);
         }
-        TextView oi =(TextView) convertView.findViewById(R.id.object_id);
-        TextView CF = (TextView) convertView.findViewById(R.id.CFText);
-        TextView min = (TextView) convertView.findViewById(R.id.minText);
-        TextView det = (TextView) convertView.findViewById(R.id.date_adapt);
+        TextView mEventName = (TextView) convertView.findViewById(R.id.event_name);
+        TextView mLocationAdd = (TextView) convertView.findViewById(R.id.locadd);
+        TextView mDateAdd = (TextView) convertView.findViewById(R.id.date_tv);
+        TextView mDescription = (TextView) convertView.findViewById(R.id.description_tv);
 
-        CF.setText(events.get(position).getName());
-        min.setText(events.get(position).getDate());
-        det.setText(events.get(position).getDescription());
-        oi.setText(events.get(position).getObjectId());
+
+        mEventName.setText(events.get(position).getName());
+        mDateAdd.setText(events.get(position).getDate());
+       mLocationAdd.setText(events.get(position).getLocation());
+        mDescription.setText(events.get(position).getDescription());
 
         return convertView;
     }
