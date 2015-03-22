@@ -1,9 +1,49 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:orientation="vertical" android:layout_width="match_parent"
-                android:layout_height="match_parent">
-        <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:id="@+id/login_btn"
-                android:text="@string/login" android:layout_alignParentTop="true" android:layout_centerHorizontal="true"
-                android:layout_marginTop="132dp"/>
-</RelativeLayout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:gravity="center_horizontal"
+    android:orientation="vertical" android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:weightSum="2"
+    android:background="@color/apptheme_primary"
+    tools:context="project.hackmty.pp_app.Login">
+
+    <!--<include
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/include" />-->
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/abc_text_size_large_material"
+        android:layout_weight="1"
+        android:src="@drawable/ic_pplogin"
+        android:id="@+id/logo"
+        android:layout_gravity="center_horizontal" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="30dip"
+        android:text="Party Pig"
+        android:textColor="@color/abc_secondary_text_material_dark"
+        android:id="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_alignBottom="@+id/include"
+        android:layout_alignTop="@+id/login_btn" />
+
+
+
+    <com.gc.materialdesign.views.ButtonFlat
+        android:id="@+id/login_btn"
+        android:layout_width="128dip"
+        android:layout_height="25dip"
+        android:layout_marginTop="16dp"
+        android:text="Sign In"
+        android:background="@color/apptheme_accent"
+        android:layout_gravity="end" />
+
+
+</LinearLayout>
